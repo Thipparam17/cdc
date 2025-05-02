@@ -71,15 +71,19 @@ services:
       - POSTGRES_USER=docker
       - POSTGRES_PASSWORD=docker
       - POSTGRES_DB=debezium_master
+    command: >
+      -c wal_level=logical
+      -c max_wal_senders=10
+      -c max_replication_slots=10
 
-  pgadmin:
-    image: dpage/pgadmin4
-    environment:
-      - PGADMIN_DEFAULT_EMAIL=pgadmin4@javapuzzle.com
-      - PGADMIN_DEFAULT_PASSWORD=admin1234
-    ports:
-      - '5051:80'
-    restart: always
+#  pgadmin:
+#    image: dpage/pgadmin4
+#    environment:
+#      - PGADMIN_DEFAULT_EMAIL=pgadmin4@javapuzzle.com
+#      - PGADMIN_DEFAULT_PASSWORD=admin1234
+#    ports:
+#      - '5051:80'
+#    restart: always
 
   zookeeper:
     image: confluentinc/cp-zookeeper:7.2.2
