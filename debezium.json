@@ -9,6 +9,7 @@
     "database.password": "docker",
     "database.dbname": "debezium_master",
     "database.server.name": "postgres",
+    "topic.prefix": "debezium",
     "table.include.list": "public.customer,public.employee,public.testcdc",
     "include.schema.changes": "true",
     "include.transaction": "true",
