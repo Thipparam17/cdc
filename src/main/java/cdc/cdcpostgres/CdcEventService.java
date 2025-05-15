@@ -68,9 +68,33 @@ public class CdcEventService {
 
         return existingEvent.isPresent();
     }
-    public void processKafkaDelete(String key) {
-        System.out.println("Handling delete for key: " + key);
-        // Your logic to delete from DB using the key
+//    public void processKafkaDelete(String key) {
+//        System.out.println("Handling delete for key: " + key);
+//        // Your logic to delete from DB using the key
+//    }
+public void processKafkaMessage(String message, String topic) {
+    // Extract table name from topic, e.g., debezium.public.customer
+    String tableName = topic.replace("debezium.public.", "");
+
+    // Parse the JSON message and store in DB
+    // Ensure your entity (CdcEvent) captures table name, data, operation, etc.
+}
+
+    public void processKafkaDelete(String key, String topic) {
+        String tableName = topic.replace("debezium.public.", "");
+
+        CdcEvent event = new CdcEvent();
+        event.setOperation("DELETE");
+        event.setTableName(tableName);
+        event.setPrimaryKey(key);
+        event.setEventTime(LocalDateTime.now());
+        event.setBeforeData(null);
+        event.setAfterData(null);
+
+        repository.save(event);
+
+        System.out.println("Processed DELETE event for key: " + key + ", table: " + tableName);
     }
+
 
 }

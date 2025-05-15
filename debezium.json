@@ -10,7 +10,8 @@
     "database.dbname": "debezium_master",
     "database.server.name": "postgres",
     "topic.prefix": "debezium",
-    "table.include.list": "public.customer,public.employee,public.testcdc",
+    "publication.name": "debezium_pub",           // 👈 use your own publication
+    "slot.name": "debezium_slot",                 // 👈 use a logical slot name
     "include.schema.changes": "true",
     "include.transaction": "true",
     "include.before.state": "true"
