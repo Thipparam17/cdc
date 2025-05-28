@@ -3,12 +3,17 @@
   "config": {
     "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
     "plugin.name": "pgoutput",
-    "database.hostname": "postgres",
+    "database.hostname": "host.docker.internal",
     "database.port": "5432",
     "database.user": "docker",
     "database.password": "docker",
     "database.dbname": "debezium_master",
     "database.server.name": "postgres",
-    "table.include.list": "public.customer,public.employee"
+    "topic.prefix": "debezium",
+    "publication.name": "debezium_pub",           // 👈 use your own publication
+    "slot.name": "debezium_slot",                 // 👈 use a logical slot name
+    "include.schema.changes": "true",
+    "include.transaction": "true",
+    "include.before.state": "true"
   }
 }
